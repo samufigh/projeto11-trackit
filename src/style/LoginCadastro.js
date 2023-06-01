@@ -53,7 +53,7 @@ export const FormContainer = styled.div`
             
         }
         button{
-            width: 308px;
+            width: 317px;
             height: 47px;
             background: #52B6FF;
             border: 0px;
@@ -66,6 +66,10 @@ export const FormContainer = styled.div`
             color: #FFFFFF;
         }
     }
+`
+
+export const SCLink = styled.div`
+    margin-top: 25px;
     span{
             font-family: 'Lexend Deca';
             font-style: normal;
@@ -74,7 +78,6 @@ export const FormContainer = styled.div`
             line-height: 17px;
             text-align: center;
             text-decoration-line: underline;
-            margin-top: 25px;
             color: #52B6FF;
         }
 `

@@ -7,13 +7,31 @@ import Hoje from "./pages/Hoje/Hoje";
 import Historico from './pages/Historico/Historico';
 
 function App() {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [name, setName] = useState('');
+    const [picture, setPicture] = useState('');
 
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Login />}/>
-          <Route path="/cadastro" element={<Cadastro />}/>
+          <Route path="/" element={<Login 
+              email={email} 
+              setEmail={setEmail} 
+              password={password} 
+              setPassword={setPassword}
+              />}/>
+          <Route path="/cadastro" element={<Cadastro 
+              email={email} 
+              setEmail={setEmail} 
+              password={password} 
+              setPassword={setPassword}
+              name={name} 
+              setName={setName} 
+              picture={picture} 
+              setPicture={setPicture}
+              />}/>
           <Route path="/habitos" element={<Habitos />}/>
           <Route path="/hoje" element={<Hoje />}/>
           <Route path="/historico" element={<Historico />}/>
