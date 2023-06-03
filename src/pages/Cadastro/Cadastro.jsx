@@ -1,14 +1,16 @@
 import { Logo, FormContainer, SCLink } from "../../style/LoginCadastro";
 import logo from "../../assets/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 import { URLbase } from "../../Consts/URLbase";
 import { useState } from "react";
+import { ThreeDots } from "react-loader-spinner";
 
 export default function Cadastro( props ) {
     const {email, password, name, picture, setEmail, setPassword, setName, setPicture} = props; 
     const [able, setAble] = useState(false);
+    const navigate = useNavigate();
 
     function info(e){
         e.preventDefault();
@@ -20,13 +22,16 @@ export default function Cadastro( props ) {
             password: password 
         }
 
+        setAble(true);
         axios.post(URLbase+"sign-up", info)
             .then(response => {
                 console.log(response.data);
-                setAble(true);
+                navigate("/");
+                
             })
-            .catch(response => {
-                console.log(response)
+            .catch(error => {
+                alert(error.response.data.message);
+                setAble(false);
             })
 
     }
@@ -79,7 +84,11 @@ export default function Cadastro( props ) {
                         type="submit"
                         disabled={able}
                         required>
-                            Cadastrar
+                            {able ? (
+                            <ThreeDots color="#FFFFFF" height={20} width={20} />
+                             ) : (
+                                "Entrar"
+                             )}
                     </button>
                 </form>
             </FormContainer>

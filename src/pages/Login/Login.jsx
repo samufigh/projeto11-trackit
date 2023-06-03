@@ -1,13 +1,15 @@
 import { LoginPage, Logo, FormContainer, SCLink } from "../../style/LoginCadastro";
 import logo from "../../assets/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import {URLbase} from "../../Consts/URLbase"
+import {URLbase} from "../../Consts/URLbase";
 import axios from "axios";
+import { ThreeDots } from "react-loader-spinner";
 
 export default function Login( props ) {
     const {email, password, setEmail, setPassword} = props;
     const [able, setAble] = useState(false);
+    const navigate = useNavigate();
 
     function login(e){
         e.preventDefault();
@@ -16,13 +18,16 @@ export default function Login( props ) {
             email: email,
             password: password
         }
+        setAble(true);
 
         axios.post(URLbase+"login", info)
             .then((response) => {
                 console.log(response.data);
+                navigate("/hoje");
             })
-            .catch((response) => {
-                alert(response.response.data.message)
+            .catch((error) => {
+                alert(error.response.data.message);
+                setAble(false);
             })
     }
 
@@ -57,7 +62,11 @@ export default function Login( props ) {
                         data-test="login-btn"
                         disabled={able}
                         required>
-                            Entrar
+                            {able ? (
+                            <ThreeDots color="#FFFFFF" height={20} width={20} />
+                             ) : (
+                                "Entrar"
+                             )}
                     </button>
                 </form>
             </FormContainer>
