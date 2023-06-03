@@ -64,6 +64,7 @@ export const FormContainer = styled.div`
             font-size: 20.976px;
             line-height: 26px;
             color: #FFFFFF;
+            cursor: pointer;
         }
     }
 `

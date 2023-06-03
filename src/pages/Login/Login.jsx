@@ -34,23 +34,25 @@ export default function Login( props ) {
             <FormContainer>
                 <form onSubmit={login}>
                     <input
+                        data-test="email-input"
                         type="email"
                         placeholder="email"
                         value={email}
                         onChange={e => setEmail(e.target.value)}
                     />
                     <input
+                        data-test="password-input"
                         type="password"
                         placeholder="senha"
                         value={password}
                         onChange={e => setPassword(e.target.value)}
                     />
-                    <button>Entrar</button>
+                    <button data-test="login-btn">Entrar</button>
                 </form>
             </FormContainer>
             <SCLink>
                 <Link to="/cadastro">
-                    <span>Não tem uma conta? Cadastre-se!</span>
+                    <span data-test="signup-link">Não tem uma conta? Cadastre-se!</span>
                 </Link>
             </SCLink>
         </LoginPage>

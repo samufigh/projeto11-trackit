@@ -36,35 +36,39 @@ export default function Cadastro( props ) {
             <FormContainer>
                 <form onSubmit={info}>
                     <input
+                        data-test="email-input"
                         type="email"
                         placeholder="email"
                         value={email}
                         onChange={e => setEmail(e.target.value)}
                     />
                     <input
+                        data-test="password-input"
                         type="password"
                         placeholder="senha"
                         value={password}
                         onChange={e => setPassword(e.target.value)}
                     />
                     <input
+                        data-test="user-name-input"
                         type="name"
                         placeholder="nome"
                         value={name}
                         onChange={e => setName(e.target.value)}
                     />
                     <input
+                        data-test="user-image-input"
                         type="picture"
                         placeholder="foto"
                         value={picture}
                         onChange={e => setPicture(e.target.value)}
                     />
-                    <button>Cadastrar</button>
+                    <button data-test="signup-btns">Cadastrar</button>
                 </form>
             </FormContainer>
             <SCLink>
                 <Link to="/">
-                    <span>Já tem uma conta? Faça login!</span>
+                    <span data-test="login-link">Já tem uma conta? Faça login!</span>
                 </Link>
             </SCLink>
         </CadastroPage>
