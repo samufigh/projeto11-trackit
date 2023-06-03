@@ -1,13 +1,18 @@
 import { LoginPage, Logo, FormContainer, SCLink } from "../../style/LoginCadastro";
 import logo from "../../assets/logo.png";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import {URLbase} from "../../Consts/URLbase";
 import axios from "axios";
 import { ThreeDots } from "react-loader-spinner";
+import { InfoContext } from "../../contexts/InfoUser";
 
-export default function Login( props ) {
-    const {email, password, setEmail, setPassword} = props;
+export default function Login() {
+    const { setLogin } = useContext(InfoContext);
+    
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
     const [able, setAble] = useState(false);
     const navigate = useNavigate();
 
@@ -22,8 +27,8 @@ export default function Login( props ) {
 
         axios.post(URLbase+"login", info)
             .then((response) => {
-                console.log(response.data);
-                navigate("/hoje");
+                navigate("/habitos");
+                setLogin(response.data);
             })
             .catch((error) => {
                 alert(error.response.data.message);

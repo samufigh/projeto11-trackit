@@ -7,8 +7,13 @@ import { URLbase } from "../../Consts/URLbase";
 import { useState } from "react";
 import { ThreeDots } from "react-loader-spinner";
 
-export default function Cadastro( props ) {
-    const {email, password, name, picture, setEmail, setPassword, setName, setPicture} = props; 
+export default function Cadastro() {
+    
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [name, setName] = useState('');
+    const [picture, setPicture] = useState('');
+
     const [able, setAble] = useState(false);
     const navigate = useNavigate();
 
@@ -27,7 +32,6 @@ export default function Cadastro( props ) {
             .then(response => {
                 console.log(response.data);
                 navigate("/");
-                
             })
             .catch(error => {
                 alert(error.response.data.message);
