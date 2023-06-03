@@ -7,6 +7,7 @@ import axios from "axios";
 
 export default function Login( props ) {
     const {email, password, setEmail, setPassword} = props;
+    const [able, setAble] = useState(false);
 
     function login(e){
         e.preventDefault();
@@ -39,6 +40,9 @@ export default function Login( props ) {
                         placeholder="email"
                         value={email}
                         onChange={e => setEmail(e.target.value)}
+                        disabled={able}
+                        required
+
                     />
                     <input
                         data-test="password-input"
@@ -46,8 +50,15 @@ export default function Login( props ) {
                         placeholder="senha"
                         value={password}
                         onChange={e => setPassword(e.target.value)}
+                        disabled={able}
+                        required
                     />
-                    <button data-test="login-btn">Entrar</button>
+                    <button 
+                        data-test="login-btn"
+                        disabled={able}
+                        required>
+                            Entrar
+                    </button>
                 </form>
             </FormContainer>
             <SCLink>

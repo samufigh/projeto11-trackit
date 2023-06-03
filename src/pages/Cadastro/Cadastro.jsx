@@ -4,9 +4,11 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 import { URLbase } from "../../Consts/URLbase";
+import { useState } from "react";
 
 export default function Cadastro( props ) {
-    const {email, password, name, picture, setEmail, setPassword, setName, setPicture} = props;
+    const {email, password, name, picture, setEmail, setPassword, setName, setPicture} = props; 
+    const [able, setAble] = useState(false);
 
     function info(e){
         e.preventDefault();
@@ -21,6 +23,7 @@ export default function Cadastro( props ) {
         axios.post(URLbase+"sign-up", info)
             .then(response => {
                 console.log(response.data);
+                setAble(true);
             })
             .catch(response => {
                 console.log(response)
@@ -41,6 +44,8 @@ export default function Cadastro( props ) {
                         placeholder="email"
                         value={email}
                         onChange={e => setEmail(e.target.value)}
+                        disabled={able}
+                        required
                     />
                     <input
                         data-test="password-input"
@@ -48,6 +53,8 @@ export default function Cadastro( props ) {
                         placeholder="senha"
                         value={password}
                         onChange={e => setPassword(e.target.value)}
+                        disabled={able}
+                        required
                     />
                     <input
                         data-test="user-name-input"
@@ -55,6 +62,8 @@ export default function Cadastro( props ) {
                         placeholder="nome"
                         value={name}
                         onChange={e => setName(e.target.value)}
+                        disabled={able}
+                        required
                     />
                     <input
                         data-test="user-image-input"
@@ -62,8 +71,16 @@ export default function Cadastro( props ) {
                         placeholder="foto"
                         value={picture}
                         onChange={e => setPicture(e.target.value)}
+                        disabled={able}
+                        required
                     />
-                    <button data-test="signup-btns">Cadastrar</button>
+                    <button 
+                        data-test="signup-btn"
+                        type="submit"
+                        disabled={able}
+                        required>
+                            Cadastrar
+                    </button>
                 </form>
             </FormContainer>
             <SCLink>
