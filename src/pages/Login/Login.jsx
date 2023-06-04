@@ -27,7 +27,7 @@ export default function Login() {
 
         axios.post(URLbase+"login", info)
             .then((response) => {
-                navigate("/habitos");
+                navigate("/hoje");
                 setLogin(response.data);
             })
             .catch((error) => {
