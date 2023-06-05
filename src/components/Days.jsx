@@ -1,15 +1,53 @@
 import styled from "styled-components";
+import { useState } from "react";
 
-export default function Days(){
+export default function Days(props){
+    const {selectedDays, setSelectedDays} = props
+    const [select, setSelect] =  useState(false);
+    const days=['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
+
+    function selected(i){
+
+        let add = true;
+        
+        selectedDays.map(selected => {
+            if (i === selected ){
+                add = false;
+            }
+        })
+        
+        if(add === true){
+            setSelectedDays([...selectedDays, i])
+            console.log([...selectedDays, i])
+        } else {
+            let newDays = [];
+            let indexDays = [...selectedDays];
+
+            indexDays.forEach(indice => {
+                if (indice != i) {
+
+                    newDays.push(indice);
+                }
+            })
+
+            setSelectedDays(newDays);
+
+    }
+        
+    }
+
     return (
         <Buttons>
-            <button>D</button>
-            <button>S</button>
-            <button>T</button>
-            <button>Q</button>
-            <button>Q</button>
-            <button>S</button>
-            <button>S</button> 
+            {days.map((day, index)=>(
+                <div key={index}>
+                    <Button
+                        data-test="habit-day"
+                        id={index}
+                        array={selectedDays}
+                        onClick={()=>selected(index)}    
+                    >{day}</Button>
+                </div>
+            ))}
         </Buttons>
     )
 }
@@ -19,12 +57,14 @@ const Buttons = styled.div`
     margin-left: 18px;
     margin-top: 4px;
     margin-bottom: 29px;
-    button{
+`
+const Button = styled.button`
         width: 30px;
         height: 30px;
         left: 36px;
         top: 218px;
-        background: #FFFFFF;
+        background: ${({array, id}) => 
+            array.includes(id) ? '#CFCFCF' : '#FFFFFF'};
         border: 1px solid #D5D5D5;
         border-radius: 5px;
         font-family: 'Lexend Deca';
@@ -32,8 +72,9 @@ const Buttons = styled.div`
         font-weight: 400;
         font-size: 19.976px;
         line-height: 25px;
-        color: #DBDBDB;
+        color: ${({ array, id }) =>
+            array.includes(id) ? '#FFFFFF' : '#D4D4D4'};
         margin-right: 4px;
         cursor: pointer;
-    }
+    
 `

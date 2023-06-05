@@ -1,28 +1,60 @@
 import styled from "styled-components";
 import Days from "./Days";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { URLenviar } from "../Consts/URLbase";
+import axios from "axios";
+import { InfoContext } from "../contexts/InfoUser";
 
 export default function AddHabits(){
-    const [click, setClick] =  useState(false)
+    const [name, setName] = useState('');
+    const [click, setClick] =  useState(false);
+    const [selectedDays, setSelectedDays] = useState([]);
+    const { login } = useContext(InfoContext);
+
     function createHabit(){
         setClick(!click);
+    }
+    function submit(){
+        const config = {
+            headers: {
+                Authorization: "Bearer " + login.token
+            }
+        }
+        console.log(config);
+
+        const request={
+            name: `${name}`,
+            days: selectedDays
+        }
+        console.log(URLenviar)
+        axios.post(URLenviar+'habits', request, config)
+        .then((response) => {
+            console.log(response.data)
+            setClick(!click)
+        })
+        .catch(erro => console.log(erro))
+
     }
     return (
         <>
             <Box>
                 <p>Meus hábitos</p>
                 <span
+                    data-test="habit-create-btn"
                     onClick={createHabit}
                 >+</span>
             </Box>
 
             {click && 
-                <Habit>
-                    <input placeholder="nome do hábito" />
-                    <Days />
+                <Habit data-test="habit-create-container">
+                    <input 
+                        placeholder="nome do hábito" 
+                        value={name}
+                        onChange={(e)=> setName(e.target.value)} />
+                    <Days selectedDays={selectedDays} setSelectedDays={setSelectedDays}/>
                     <Submit>
-                        <p>Cancelar</p>
-                        <span>Salvar</span>
+                        <p data-test="habit-create-cancel-btn" onClick={()=> setClick(false)}>Cancelar</p>
+                        <button data-test="habit-create-save-btn" disabled={(name==='' || selectedDays===[]) ? true : false} onClick={submit}>Salvar</button>
                     </Submit>
                 </Habit>
             }
@@ -111,7 +143,7 @@ const Submit =  styled.div`
         margin-right: 23px;
         cursor: pointer;
     }
-    span{
+    button{
         width: 84px;
         height: 35px;
         background: #52B6FF;
@@ -126,5 +158,6 @@ const Submit =  styled.div`
         align-items: center;
         justify-content: center;
         cursor: pointer;
+        border: 0px;
     }
 `

@@ -4,6 +4,9 @@ import Header from "../../components/Header";
 import Menu from "../../components/Menu";
 import styled from "styled-components";
 import AddHabits from "../../components/AddHabits";
+import { URLenviar } from "../../Consts/URLbase";
+import axios from "axios";
+import MyHabits from "../../components/MyHabits";
 
 export default function Habitos(){
     const { login } = useContext(InfoContext);
@@ -15,7 +18,7 @@ export default function Habitos(){
             <h1>
                 Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!
             </h1>
-            {console.log(login)}
+            <MyHabits />
             <Menu />
         </Habits>
     )
