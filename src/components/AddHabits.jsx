@@ -48,6 +48,7 @@ export default function AddHabits(){
             {click && 
                 <Habit data-test="habit-create-container">
                     <input 
+                        data-test="habit-name-input"
                         placeholder="nome do hábito" 
                         value={name}
                         onChange={(e)=> setName(e.target.value)} />
