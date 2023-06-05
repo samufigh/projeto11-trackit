@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function Menu(){
     return(
-        <Footer>
+        <Footer data-test="menu">
             <Link data-test="habit-link" to="/habitos">
               <p>Hábitos</p>
               </Link>

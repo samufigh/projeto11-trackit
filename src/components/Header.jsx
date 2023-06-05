@@ -7,9 +7,9 @@ export default function Header(){
 
     return(
         <>
-            <Box>
+            <Box data-test="header">
                 <p>TrackIt</p>
-                <img src={login.image} alt="image"/>
+                <img data-test="avatar" src={login.image} alt="image"/>
             </Box>
          </>
     )
